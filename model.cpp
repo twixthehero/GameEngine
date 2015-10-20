@@ -31,7 +31,7 @@ void Model::readModelData()
 	string line;
 	vector<string> data;
 
-	inFile.open(name + ".obj");
+	inFile.open(OBJ_DIR + name + ".obj");
 
 	if (inFile.is_open())
 	{

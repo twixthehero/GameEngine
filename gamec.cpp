@@ -1,8 +1,7 @@
 #include "gamec.h"
 
+#include <iostream>
+using namespace std;
+
 GameComponent::GameComponent() {}
 GameComponent::~GameComponent() {}
-
-void GameComponent::init() {}
-void GameComponent::update() {}
-void GameComponent::render() {}

@@ -10,7 +10,7 @@ public:
 	GameObject();
 	~GameObject();
 
-	void addComponent(IGameComponent);
+	void addComponent(IGameComponent*);
 
 	//gets the first component from the list of type T
 	template <typename T>
@@ -22,5 +22,5 @@ public:
 
 	Transform transform;
 private:
-	vector<IGameComponent> components;
+	vector<IGameComponent*> components;
 };

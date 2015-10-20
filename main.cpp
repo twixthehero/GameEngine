@@ -5,33 +5,12 @@
 #include "world.h"
 using namespace std;
 
-float points[] =
-{
-	0, 0, 0,
-	1, 0, 0,
-	0, 1, 0
-};
-
-GLuint vbo = 0;
-GLuint vao = 0;
-
 ShaderManager shaderManager;
 World world;
 
 void init()
 {
 	glClearColor(101 / 255.0f, 156 / 255.0f, 239 / 255.0f, 1.0f);
-
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), points, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 	shaderManager.init();
 	world.init();
@@ -49,10 +28,6 @@ void render()
 	glUseProgram(shaderManager.getDefaultShader());
 
 	world.render();
-
-	glBindVertexArray(vao);
-
-	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glFlush();
 }

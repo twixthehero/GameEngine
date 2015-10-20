@@ -16,6 +16,7 @@ private:
 	void readModelData();
 	void genMeshData(vector<string>);
 
+	const string OBJ_DIR = "objs\\";
 	string name;
 	Mesh mesh;
 };

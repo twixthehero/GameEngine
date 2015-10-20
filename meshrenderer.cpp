@@ -1,6 +1,9 @@
 #include <GL\glew.h>
 #include "meshrenderer.h"
 
+#include <iostream>
+using namespace std;
+
 MeshRenderer::MeshRenderer(Model model)
 {
 	mesh = model.getMesh();
@@ -15,6 +18,9 @@ MeshRenderer::~MeshRenderer() {}
 
 void MeshRenderer::init()
 {
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, mesh.getDataCount() * sizeof(float), &mesh.data[0], GL_STATIC_DRAW);
@@ -33,5 +39,6 @@ void MeshRenderer::init()
 
 void MeshRenderer::render()
 {
+	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, mesh.getNumIndices() * sizeof(int), GL_UNSIGNED_INT, NULL);
 }

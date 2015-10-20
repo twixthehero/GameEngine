@@ -1,7 +1,14 @@
+#include "meshrenderer.h"
+#include "model.h"
 #include "world.h"
 
 World::World()
 {
+	GameObject tri;
+	Model triModel("triangle");
+	MeshRenderer* triRenderer = new MeshRenderer(triModel);
+	tri.addComponent(triRenderer);
+	addObject(tri);
 }
 
 World::~World() {}
