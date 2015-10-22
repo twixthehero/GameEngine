@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 #include "igamec.h"
-#include "transform.h"
 using namespace std;
 
+#include "transform.h"
 class GameObject
 {
 public:
@@ -20,7 +20,14 @@ public:
 	void update();
 	void render();
 
+	void setParent(Transform);
+	int getNumChildren();
+	void addChild(GameObject);
+	GameObject getChild(int);
+
+	Transform parent;
 	Transform transform;
 private:
 	vector<IGameComponent*> components;
+	vector<GameObject> children;
 };

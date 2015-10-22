@@ -2,7 +2,10 @@
 #include "gameobject.h"
 #include "meshrenderer.h"
 
-GameObject::GameObject() {}
+GameObject::GameObject()
+{
+	transform.gameObject = this;
+}
 GameObject::~GameObject() {}
 
 void GameObject::addComponent(IGameComponent* igc)
@@ -32,6 +35,9 @@ void GameObject::init()
 			continue;
 		}
 	}
+
+	for (int i = 0; i < children.size(); i++)
+		children[i].init();
 }
 
 void GameObject::update()
@@ -46,6 +52,9 @@ void GameObject::update()
 			continue;
 		}
 	}
+
+	for (int i = 0; i < children.size(); i++)
+		children[i].update();
 }
 
 void GameObject::render()
@@ -60,4 +69,28 @@ void GameObject::render()
 			continue;
 		}
 	}
+
+	for (int i = 0; i < children.size(); i++)
+		children[i].render();
+}
+
+int GameObject::getNumChildren() { return children.size(); }
+
+void GameObject::setParent(Transform parent)
+{
+	this->parent = parent;
+}
+
+void GameObject::addChild(GameObject child)
+{
+	child.setParent(transform);
+	children.push_back(child);
+}
+
+GameObject GameObject::getChild(int index)
+{
+	if (index < getNumChildren())
+		return children[index];
+	
+	throw new exception("Index out of bounds");
 }
