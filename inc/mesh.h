@@ -14,4 +14,6 @@ public:
 
 	vector<int> indices;
 	vector<float> data;
+	bool hasUVs;
+	bool hasNormals;
 };

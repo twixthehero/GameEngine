@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\color.cpp" />
     <ClCompile Include="src\gamec.cpp" />
     <ClCompile Include="src\gameobject.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -136,11 +137,13 @@
     <ClCompile Include="src\model.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\shadermanager.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\transform.cpp" />
     <ClCompile Include="src\vertex.cpp" />
     <ClCompile Include="src\world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\color.h" />
     <ClInclude Include="inc\gamec.h" />
     <ClInclude Include="inc\gameobject.h" />
     <ClInclude Include="inc\gametime.h" />
@@ -151,6 +154,7 @@
     <ClInclude Include="inc\shader.h" />
     <ClInclude Include="inc\shadermanager.h" />
     <ClInclude Include="inc\helper.h" />
+    <ClInclude Include="inc\texture.h" />
     <ClInclude Include="inc\transform.h" />
     <ClInclude Include="inc\vertex.h" />
     <ClInclude Include="inc\world.h" />

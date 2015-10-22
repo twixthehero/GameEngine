@@ -52,6 +52,8 @@ void Model::genMeshData(vector<string> lines)
 	vector<vec2> uvs;
 	vector<vec3> norms;
 	vector<string> f;
+	bool hasUVs = false;
+	bool hasNormals = false;
 
 	for (int i = 0; i < lines.size(); i++)
 	{
@@ -79,24 +81,33 @@ void Model::genMeshData(vector<string> lines)
 		}
 	}
 
+	vector<string> indices = split(f[0], '/');
+	if (indices[1].size() > 0) hasUVs = true;
+	if (indices[2].size() > 0) hasNormals = true;
+
 	//create verts for all the data
 	vector<Vertex> verts;
 	for (int i = 0; i < f.size(); i++)
 	{
-		vector<string> indices = split(f[i], '/');
+		indices.clear();
+		indices = split(f[i], '/');
 
 		Vertex v;
 		v.pos = points[stoi(indices[0]) - 1];
-		v.uv = uvs[stoi(indices[1]) - 1];
-		v.norm = norms[stoi(indices[2]) - 1];
+
+		if (hasUVs)
+			v.uv = uvs[stoi(indices[1]) - 1];
+
+		if (hasNormals)
+			v.norm = norms[stoi(indices[2]) - 1];
 
 		verts.push_back(v);
 	}
 
-	vector<int> indices;
+	vector<int> index;
 	vector<Vertex> nodup;
 	nodup.push_back(verts[0]);
-	indices.push_back(0);
+	index.push_back(0);
 	int c = 0;
 	for (int i = 1; i < verts.size(); i++)
 	{
@@ -106,7 +117,7 @@ void Model::genMeshData(vector<string> lines)
 		{
 			if (verts[i] == nodup[k])
 			{
-				indices.push_back(k);
+				index.push_back(k);
 				eq = true;
 				break;
 			}
@@ -115,11 +126,13 @@ void Model::genMeshData(vector<string> lines)
 		if (!eq)
 		{
 			c++;
-			indices.push_back(nodup.size());
+			index.push_back(nodup.size());
 			nodup.push_back(verts[i]);
 		}
 	}
 
-	mesh.indices = indices;
+	mesh.indices = index;
 	mesh.data = toVectorFloat(nodup);
+	mesh.hasUVs = hasUVs;
+	mesh.hasNormals = hasNormals;
 }

@@ -18,9 +18,24 @@ ShaderManager::~ShaderManager()
 
 void ShaderManager::init()
 {
-	cout << "Loading default shader" << endl;
-	Shader dv("default.vs");
-	Shader df("default.fs");
+	load("default");
+}
+
+GLuint ShaderManager::getDefaultShader() { return loadedShaders["default"]; }
+
+GLuint ShaderManager::getShader(string name)
+{
+	if (loadedShaders[name] == NULL)
+		load(name);
+
+	return loadedShaders[name];
+}
+
+void ShaderManager::load(string name)
+{
+	cout << "Loading shader: " << name << endl;
+	Shader dv(name + ".vs");
+	Shader df(name + ".fs");
 
 	string v = dv.getText();
 	string f = df.getText();
@@ -53,11 +68,21 @@ void ShaderManager::init()
 		exit(-1);
 	}
 
-	cout << "Linking vertex and fragment" << endl;
-	defaultShader = glCreateProgram();
-	glAttachShader(defaultShader, vs);
-	glAttachShader(defaultShader, fs);
-	glLinkProgram(defaultShader);
-}
+	cout << "Reserving pointer for shader" << endl;
+	loadedShaders[name] = 0;
 
-GLuint ShaderManager::getDefaultShader() { return defaultShader; }
+	cout << "Linking vertex and fragment" << endl;
+	loadedShaders[name] = glCreateProgram();
+	glAttachShader(loadedShaders[name], vs);
+	glAttachShader(loadedShaders[name], fs);
+	glLinkProgram(loadedShaders[name]);
+
+	glGetShaderiv(loadedShaders[name], GL_LINK_STATUS, &success);
+	if (GL_TRUE != success)
+	{
+		cout << "ERROR: shader '" << name << "' did not link properly" << endl;
+		exit(-1);
+	}
+
+	cout << "Loaded!" << endl;
+}

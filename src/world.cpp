@@ -1,3 +1,4 @@
+#include "texture.h"
 #include "meshrenderer.h"
 #include "model.h"
 #include "world.h"
@@ -9,6 +10,8 @@ World::World()
 	MeshRenderer* triRenderer = new MeshRenderer(triModel);
 	tri.addComponent(triRenderer);
 	addObject(tri);
+
+	//Texture t("herp.png");
 }
 
 World::~World() {}

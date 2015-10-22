@@ -26,11 +26,19 @@ void MeshRenderer::init()
 	glBufferData(GL_ARRAY_BUFFER, mesh.getDataCount() * sizeof(float), &mesh.data[0], GL_STATIC_DRAW);
 	
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 32, (void*)0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 32, (void*)12);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 32, (void*)20);
+
+	if (mesh.hasUVs)
+	{
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 32, (void*)12);
+	}
+
+	if (mesh.hasNormals)
+	{
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 32, (void*)20);
+	}
 
 	glGenBuffers(1, &ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
