@@ -1,4 +1,4 @@
-#include "Vertex.h"
+#include "vertex.h"
 
 Vertex::Vertex() {}
 Vertex::Vertex(vec3 pos) : Vertex(pos, vec2(0, 0)) {}

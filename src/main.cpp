@@ -1,6 +1,7 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <iostream>
+#include "gametime.h"
 #include "shadermanager.h"
 #include "world.h"
 using namespace std;
@@ -12,12 +13,14 @@ void init()
 {
 	glClearColor(101 / 255.0f, 156 / 255.0f, 239 / 255.0f, 1.0f);
 
+	GameTime::init();
 	shaderManager.init();
 	world.init();
 }
 
 void update()
 {
+	GameTime::update();
 	world.update();
 }
 
@@ -44,7 +47,7 @@ int main()
 
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "Blockus", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1280, 720, "GameEngine", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();

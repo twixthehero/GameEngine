@@ -69,7 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)lib\glm-0.9.7.0;$(ProjectDir)lib\glfw-3.1.1\include;$(ProjectDir)lib\glew-1.13.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)lib\glm-0.9.7.0;$(ProjectDir)lib\glfw-3.1.1\include;$(ProjectDir)lib\glew-1.13.0\include;$(ProjectDir)inc;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)lib\glfw-3.1.1\lib;$(ProjectDir)lib\glew-1.13.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -123,31 +123,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gamec.cpp" />
-    <ClCompile Include="gameobject.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="mesh.cpp" />
-    <ClCompile Include="meshrenderer.cpp" />
-    <ClCompile Include="model.cpp" />
-    <ClCompile Include="shader.cpp" />
-    <ClCompile Include="shadermanager.cpp" />
-    <ClCompile Include="transform.cpp" />
-    <ClCompile Include="vertex.cpp" />
-    <ClCompile Include="world.cpp" />
+    <ClCompile Include="src\gamec.cpp" />
+    <ClCompile Include="src\gameobject.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mesh.cpp" />
+    <ClCompile Include="src\meshrenderer.cpp" />
+    <ClCompile Include="src\model.cpp" />
+    <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\shadermanager.cpp" />
+    <ClCompile Include="src\transform.cpp" />
+    <ClCompile Include="src\vertex.cpp" />
+    <ClCompile Include="src\world.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gamec.h" />
-    <ClInclude Include="gameobject.h" />
-    <ClInclude Include="igamec.h" />
-    <ClInclude Include="mesh.h" />
-    <ClInclude Include="meshrenderer.h" />
-    <ClInclude Include="model.h" />
-    <ClInclude Include="shader.h" />
-    <ClInclude Include="shadermanager.h" />
-    <ClInclude Include="helper.h" />
-    <ClInclude Include="transform.h" />
-    <ClInclude Include="vertex.h" />
-    <ClInclude Include="world.h" />
+    <ClInclude Include="inc\gamec.h" />
+    <ClInclude Include="inc\gameobject.h" />
+    <ClInclude Include="inc\gametime.h" />
+    <ClInclude Include="inc\igamec.h" />
+    <ClInclude Include="inc\mesh.h" />
+    <ClInclude Include="inc\meshrenderer.h" />
+    <ClInclude Include="inc\model.h" />
+    <ClInclude Include="inc\shader.h" />
+    <ClInclude Include="inc\shadermanager.h" />
+    <ClInclude Include="inc\helper.h" />
+    <ClInclude Include="inc\transform.h" />
+    <ClInclude Include="inc\vertex.h" />
+    <ClInclude Include="inc\world.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\default.fs" />
