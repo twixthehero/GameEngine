@@ -1,16 +1,16 @@
 #pragma once
 #include <vector>
-#include "igamec.h"
+#include "gamec.h"
+#include "transform.h"
 using namespace std;
 
-#include "transform.h"
 class GameObject
 {
 public:
 	GameObject();
 	~GameObject();
 
-	void addComponent(IGameComponent*);
+	void addComponent(GameComponent*);
 
 	//gets the first component from the list of type T
 	template <typename T>
@@ -28,6 +28,6 @@ public:
 	Transform parent;
 	Transform transform;
 private:
-	vector<IGameComponent*> components;
+	vector<GameComponent*> components;
 	vector<GameObject> children;
 };

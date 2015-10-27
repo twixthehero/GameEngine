@@ -95,10 +95,14 @@
     <ClInclude Include="inc\gametime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="inc\texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="inc\color.h">
+=======
+    <ClInclude Include="inc\gamectype.h">
+>>>>>>> Stashed changes
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

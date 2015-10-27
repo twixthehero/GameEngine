@@ -6,11 +6,13 @@ using namespace std;
 
 MeshRenderer::MeshRenderer(Model model)
 {
+	type = MESH_RENDERER;
 	mesh = model.getMesh();
 }
 
 MeshRenderer::MeshRenderer(Mesh m)
 {
+	type = MESH_RENDERER;
 	mesh = m;
 }
 

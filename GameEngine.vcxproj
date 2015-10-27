@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="inc\color.h" />
     <ClInclude Include="inc\gamec.h" />
+    <ClInclude Include="inc\gamectype.h" />
     <ClInclude Include="inc\gameobject.h" />
     <ClInclude Include="inc\gametime.h" />
     <ClInclude Include="inc\igamec.h" />

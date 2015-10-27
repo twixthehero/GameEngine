@@ -8,7 +8,7 @@ GameObject::GameObject()
 }
 GameObject::~GameObject() {}
 
-void GameObject::addComponent(IGameComponent* igc)
+void GameObject::addComponent(GameComponent* igc)
 {
 	components.push_back(igc);
 }
@@ -27,11 +27,9 @@ void GameObject::init()
 {
 	for (int i = 0; i < components.size(); i++)
 	{
-		MeshRenderer* mr = dynamic_cast<MeshRenderer*>(components[i]);
-
-		if (mr)
+		if (components[i]->type == MESH_RENDERER)
 		{
-			mr->init();
+			dynamic_cast<MeshRenderer*>(components[i])->init();
 			continue;
 		}
 	}
@@ -44,11 +42,9 @@ void GameObject::update()
 {
 	for (int i = 0; i < components.size(); i++)
 	{
-		MeshRenderer* mr = dynamic_cast<MeshRenderer*>(components[i]);
-
-		if (mr)
+		if (components[i]->type == MESH_RENDERER)
 		{
-			mr->update();
+			dynamic_cast<MeshRenderer*>(components[i])->update();
 			continue;
 		}
 	}
@@ -61,11 +57,9 @@ void GameObject::render()
 {
 	for (int i = 0; i < components.size(); i++)
 	{
-		MeshRenderer* mr = dynamic_cast<MeshRenderer*>(components[i]);
-
-		if (mr)
+		if (components[i]->type == MESH_RENDERER)
 		{
-			mr->render();
+			dynamic_cast<MeshRenderer*>(components[i])->render();
 			continue;
 		}
 	}
