@@ -20,15 +20,15 @@ public:
 	void update();
 	void render();
 
-	GameObject getParent();
-	void setParent(GameObject);
+	GameObject* getParent();
+	void setParent(GameObject*);
 	int getNumChildren();
-	void addChild(GameObject);
-	GameObject getChild(int);
+	void addChild(GameObject*);
+	GameObject* getChild(int);
 
 	Transform transform;
 private:
 	vector<GameComponent*> components;
-	vector<GameObject> children;
-	GameObject& parent;
+	vector<GameObject*> children;
+	GameObject* parent;
 };

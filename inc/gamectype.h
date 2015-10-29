@@ -2,5 +2,5 @@
 
 enum EGameComponentType
 {
-	NO_TYPE, MESH_RENDERER
+	NO_TYPE, CAMERA, MESH_RENDERER, FLY_MOVE
 };

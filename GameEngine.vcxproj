@@ -130,8 +130,10 @@
   <ItemGroup>
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\color.cpp" />
+    <ClCompile Include="src\flymove.cpp" />
     <ClCompile Include="src\gamec.cpp" />
     <ClCompile Include="src\gameobject.cpp" />
+    <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\meshrenderer.cpp" />
@@ -146,11 +148,13 @@
   <ItemGroup>
     <ClInclude Include="inc\camera.h" />
     <ClInclude Include="inc\color.h" />
+    <ClInclude Include="inc\flymove.h" />
     <ClInclude Include="inc\gamec.h" />
     <ClInclude Include="inc\gamectype.h" />
     <ClInclude Include="inc\gameobject.h" />
     <ClInclude Include="inc\gametime.h" />
     <ClInclude Include="inc\igamec.h" />
+    <ClInclude Include="inc\input.h" />
     <ClInclude Include="inc\mesh.h" />
     <ClInclude Include="inc\meshrenderer.h" />
     <ClInclude Include="inc\model.h" />

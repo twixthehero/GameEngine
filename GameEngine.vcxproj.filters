@@ -15,6 +15,8 @@
     <ClCompile Include="src\vertex.cpp" />
     <ClCompile Include="src\world.cpp" />
     <ClCompile Include="src\camera.cpp" />
+    <ClCompile Include="src\flymove.cpp" />
+    <ClCompile Include="src\input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\color.h" />
@@ -34,6 +36,8 @@
     <ClInclude Include="inc\vertex.h" />
     <ClInclude Include="inc\world.h" />
     <ClInclude Include="inc\camera.h" />
+    <ClInclude Include="inc\FlyMove.h" />
+    <ClInclude Include="inc\input.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\default.fs" />

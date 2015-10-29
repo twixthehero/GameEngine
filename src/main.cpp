@@ -1,12 +1,18 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <iostream>
+#include "camera.h"
 #include "gametime.h"
+#include "input.h"
 #include "shadermanager.h"
 #include "world.h"
 using namespace std;
 
+GLFWwindow* window;
+Input input;
 ShaderManager shaderManager;
+GLuint defShader;
+GLuint uniWorld;
 World world;
 
 void init()
@@ -14,8 +20,12 @@ void init()
 	glClearColor(101 / 255.0f, 156 / 255.0f, 239 / 255.0f, 1.0f);
 
 	GameTime::init();
+	input.setWindow(window);
 	shaderManager.init();
 	world.init();
+
+	defShader = shaderManager.getDefaultShader();
+	uniWorld = glGetUniformLocation(defShader, "worldMatrix");
 }
 
 void update()
@@ -28,7 +38,10 @@ void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glUseProgram(shaderManager.getDefaultShader());
+	glUseProgram(defShader);
+
+	glProgramUniformMatrix4fv(defShader, uniWorld, 1, GL_FALSE,
+		&(Camera::getMain()->getWorldMatrix())[0][0]);
 
 	world.render();
 
@@ -47,7 +60,7 @@ int main()
 
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "GameEngine", NULL, NULL);
+	window = glfwCreateWindow(1280, 720, "GameEngine", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();

@@ -2,6 +2,8 @@
 #include "meshrenderer.h"
 #include "model.h"
 #include "world.h"
+#include "camera.h"
+#include "flymove.h"
 
 World::World()
 {
@@ -10,6 +12,14 @@ World::World()
 	MeshRenderer* triRenderer = new MeshRenderer(triModel);
 	tri.addComponent(triRenderer);
 	addObject(tri);
+
+	GameObject cam;
+	Camera* camera = new Camera();
+	FlyMove* flymove = new FlyMove();
+	cam.addComponent(camera);
+	cam.addComponent(flymove);
+
+	Camera::setMain(camera);
 
 	//Texture t("herp.png");
 }

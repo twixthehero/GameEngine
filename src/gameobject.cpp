@@ -1,4 +1,6 @@
 #include <typeinfo>
+#include "camera.h"
+#include "flymove.h"
 #include "gameobject.h"
 #include "meshrenderer.h"
 
@@ -10,6 +12,7 @@ GameObject::~GameObject() {}
 
 void GameObject::addComponent(GameComponent* igc)
 {
+	igc->gameObject = this;
 	components.push_back(igc);
 }
 
@@ -27,61 +30,90 @@ void GameObject::init()
 {
 	for (int i = 0; i < components.size(); i++)
 	{
-		if (components[i]->type == MESH_RENDERER)
+		switch (components[i]->type)
 		{
+		case CAMERA:
+			dynamic_cast<Camera*>(components[i])->init();
+			continue;
+		case MESH_RENDERER:
 			dynamic_cast<MeshRenderer*>(components[i])->init();
+			continue;
+		case FLY_MOVE:
+			dynamic_cast<FlyMove*>(components[i])->init();
+			continue;
+		default:
+			cout << "Error: Unknown component type" << endl;
 			continue;
 		}
 	}
 
 	for (int i = 0; i < children.size(); i++)
-		children[i].init();
+		(*children[i]).init();
 }
 
 void GameObject::update()
 {
 	for (int i = 0; i < components.size(); i++)
 	{
-		if (components[i]->type == MESH_RENDERER)
+		switch (components[i]->type)
 		{
+		case CAMERA:
+			dynamic_cast<Camera*>(components[i])->update();
+			continue;
+		case MESH_RENDERER:
 			dynamic_cast<MeshRenderer*>(components[i])->update();
+			continue;
+		case FLY_MOVE:
+			dynamic_cast<FlyMove*>(components[i])->update();
+			continue;
+		default:
+			cout << "Error: Unknown component type" << endl;
 			continue;
 		}
 	}
 
 	for (int i = 0; i < children.size(); i++)
-		children[i].update();
+		(*children[i]).update();
 }
 
 void GameObject::render()
 {
 	for (int i = 0; i < components.size(); i++)
 	{
-		if (components[i]->type == MESH_RENDERER)
+		switch (components[i]->type)
 		{
+		case MESH_RENDERER:
 			dynamic_cast<MeshRenderer*>(components[i])->render();
+			continue;
+		default:
+			cout << "Error: Unknown component type" << endl;
 			continue;
 		}
 	}
 
 	for (int i = 0; i < children.size(); i++)
-		children[i].render();
+		(*children[i]).render();
 }
 
 int GameObject::getNumChildren() { return children.size(); }
 
-void GameObject::setParent(Transform parent)
+GameObject* GameObject::getParent()
+{
+	return parent;
+}
+
+void GameObject::setParent(GameObject* parent)
 {
 	this->parent = parent;
 }
 
-void GameObject::addChild(GameObject child)
+void GameObject::addChild(GameObject* child)
 {
-	child.setParent(transform);
+	child->setParent(this);
 	children.push_back(child);
 }
 
-GameObject GameObject::getChild(int index)
+GameObject* GameObject::getChild(int index)
 {
 	if (index < getNumChildren())
 		return children[index];

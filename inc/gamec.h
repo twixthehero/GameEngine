@@ -2,6 +2,7 @@
 #include "igamec.h"
 #include "gamectype.h"
 
+class GameObject;
 class GameComponent : public IGameComponent
 {
 public:
@@ -9,4 +10,5 @@ public:
 	~GameComponent();
 
 	EGameComponentType type;
+	GameObject* gameObject;
 };
