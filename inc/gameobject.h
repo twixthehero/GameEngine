@@ -26,7 +26,7 @@ public:
 	void addChild(GameObject*);
 	GameObject* getChild(int);
 
-	Transform transform;
+	Transform* transform;
 private:
 	vector<GameComponent*> components;
 	vector<GameObject*> children;

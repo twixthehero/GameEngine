@@ -16,7 +16,7 @@ void Camera::setMain(Camera* newMain) { main = newMain; }
 
 void Camera::init()
 {
-	trans = &(gameObject->transform);
+	trans = gameObject->transform;
 }
 
 void Camera::update()

@@ -7,18 +7,18 @@
 
 World::World()
 {
-	GameObject tri;
+	GameObject* tri = new GameObject();
+	tri->transform->pos.z = 5;
 	Model triModel("triangle");
 	MeshRenderer* triRenderer = new MeshRenderer(triModel);
-	tri.addComponent(triRenderer);
+	tri->addComponent(triRenderer);
 	addObject(tri);
 
-	GameObject cam;
-	cam.transform.pos = vec3(0, 0, -2);
+	GameObject* cam = new GameObject();
 	Camera* camera = new Camera();
 	FlyMove* flymove = new FlyMove();
-	cam.addComponent(camera);
-	cam.addComponent(flymove);
+	cam->addComponent(camera);
+	cam->addComponent(flymove);
 	addObject(cam);
 
 	Camera::setMain(camera);
@@ -28,7 +28,7 @@ World::World()
 
 World::~World() {}
 
-void World::addObject(GameObject o)
+void World::addObject(GameObject* o)
 {
 	objects.push_back(o);
 }
@@ -36,17 +36,17 @@ void World::addObject(GameObject o)
 void World::init()
 {
 	for (int i = 0; i < objects.size(); i++)
-		objects[i].init();
+		(*objects[i]).init();
 }
 
 void World::update()
 {
 	for (int i = 0; i < objects.size(); i++)
-		objects[i].update();
+		(*objects[i]).update();
 }
 
 void World::render()
 {
 	for (int i = 0; i < objects.size(); i++)
-		objects[i].render();
+		(*objects[i]).render();
 }

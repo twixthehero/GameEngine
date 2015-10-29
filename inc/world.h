@@ -9,11 +9,11 @@ public:
 	World();
 	~World();
 
-	void addObject(GameObject);
+	void addObject(GameObject*);
 
 	void init();
 	void update();
 	void render();
 private:
-	vector<GameObject> objects;
+	vector<GameObject*> objects;
 };

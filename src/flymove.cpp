@@ -5,6 +5,7 @@
 #include "input.h"
 #include "transform.h"
 #include <iostream>
+#include <iomanip>
 FlyMove::FlyMove()
 {
 	type = EGameComponentType::FLY_MOVE;
@@ -12,26 +13,26 @@ FlyMove::FlyMove()
 
 void FlyMove::init()
 {
-	trans = &(gameObject->transform);
+	trans = gameObject->transform;
 }
 
 void FlyMove::update()
 {
 	if (Input::getKey(GLFW_KEY_S))
 	{
-		trans->pos.z += moveSpeed * GameTime::dt;
+		trans->pos.z -= moveSpeed * GameTime::dt;
 	}
 	if (Input::getKey(GLFW_KEY_W))
 	{
-		trans->pos.z -= moveSpeed * GameTime::dt;
+		trans->pos.z += moveSpeed * GameTime::dt;
 	}
 	if (Input::getKey(GLFW_KEY_D))
 	{
-		trans->pos.x -= moveSpeed * GameTime::dt;
+		trans->pos.x += moveSpeed * GameTime::dt;
 	}
 	if (Input::getKey(GLFW_KEY_A))
 	{
-		trans->pos.x += moveSpeed * GameTime::dt;
+		trans->pos.x -= moveSpeed * GameTime::dt;
 	}
 	if (Input::getKey(GLFW_KEY_E))
 	{
@@ -42,5 +43,5 @@ void FlyMove::update()
 		trans->pos.y -= moveSpeed * GameTime::dt;
 	}
 
-	std::cout << "pos: " << trans->pos.x << "," << trans->pos.y << "," << trans->pos.z << std::endl;
+	std::cout << std::setprecision(3) << std::fixed << "pos: " << trans->pos.x << ", " << trans->pos.y << ", " << trans->pos.z << std::endl;
 }

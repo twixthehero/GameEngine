@@ -9,7 +9,7 @@ public:
 	virtual void init();
 	virtual void update();
 
-	float moveSpeed = 5.0f;
+	double moveSpeed = 5.0f;
 private:
 	Transform* trans;
 };

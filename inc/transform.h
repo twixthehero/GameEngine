@@ -2,7 +2,6 @@
 #include <glm\glm.hpp>
 using namespace glm;
 
-class GameObject;
 class Transform
 {
 public:
@@ -12,5 +11,4 @@ public:
 	vec3 pos;
 	vec3 rot;
 	vec3 scale;
-	GameObject* gameObject;
 };
