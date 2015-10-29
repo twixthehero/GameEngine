@@ -17,6 +17,7 @@
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\flymove.cpp" />
     <ClCompile Include="src\input.cpp" />
+    <ClCompile Include="src\gametime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\color.h" />

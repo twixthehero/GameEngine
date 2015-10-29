@@ -4,10 +4,14 @@
 #include "gametime.h"
 #include "input.h"
 #include "transform.h"
-
+#include <iostream>
 FlyMove::FlyMove()
 {
 	type = EGameComponentType::FLY_MOVE;
+}
+
+void FlyMove::init()
+{
 	trans = &(gameObject->transform);
 }
 
@@ -37,4 +41,6 @@ void FlyMove::update()
 	{
 		trans->pos.y -= moveSpeed * GameTime::dt;
 	}
+
+	std::cout << "pos: " << trans->pos.x << "," << trans->pos.y << "," << trans->pos.z << std::endl;
 }

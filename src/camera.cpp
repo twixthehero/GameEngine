@@ -4,14 +4,20 @@
 #include "gameobject.h"
 using namespace glm;
 
+Camera* Camera::main = NULL;
+
 Camera::Camera()
 {
 	type = EGameComponentType::CAMERA;
-	trans = &(gameObject->transform);
 }
 
 Camera* Camera::getMain() { return main; }
 void Camera::setMain(Camera* newMain) { main = newMain; }
+
+void Camera::init()
+{
+	trans = &(gameObject->transform);
+}
 
 void Camera::update()
 {

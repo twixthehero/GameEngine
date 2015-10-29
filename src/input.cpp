@@ -1,5 +1,7 @@
 #include "input.h"
 
+GLFWwindow* Input::window = NULL;
+
 Input::Input() {}
 
 void Input::setWindow(GLFWwindow* win)

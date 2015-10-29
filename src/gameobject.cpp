@@ -42,7 +42,7 @@ void GameObject::init()
 			dynamic_cast<FlyMove*>(components[i])->init();
 			continue;
 		default:
-			cout << "Error: Unknown component type" << endl;
+			cout << "Error: Unknown component type: " << components[i]->type << endl;
 			continue;
 		}
 	}
@@ -60,14 +60,11 @@ void GameObject::update()
 		case CAMERA:
 			dynamic_cast<Camera*>(components[i])->update();
 			continue;
-		case MESH_RENDERER:
-			dynamic_cast<MeshRenderer*>(components[i])->update();
-			continue;
 		case FLY_MOVE:
 			dynamic_cast<FlyMove*>(components[i])->update();
 			continue;
 		default:
-			cout << "Error: Unknown component type" << endl;
+			//cout << "Error: Unknown component type: " << components[i]->type << endl;
 			continue;
 		}
 	}
@@ -86,7 +83,7 @@ void GameObject::render()
 			dynamic_cast<MeshRenderer*>(components[i])->render();
 			continue;
 		default:
-			cout << "Error: Unknown component type" << endl;
+			//cout << "Error: Unknown component type: " << components[i]->type << endl;
 			continue;
 		}
 	}

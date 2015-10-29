@@ -6,6 +6,7 @@ class FlyMove : public GameComponent
 {
 public:
 	FlyMove();
+	virtual void init();
 	virtual void update();
 
 	float moveSpeed = 5.0f;

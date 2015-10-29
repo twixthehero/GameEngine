@@ -6,6 +6,7 @@ class Camera : public GameComponent
 {
 public:
 	Camera();
+	virtual void init();
 	virtual void update();
 	mat4 getWorldMatrix();
 	static Camera* getMain();

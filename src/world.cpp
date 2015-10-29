@@ -14,10 +14,12 @@ World::World()
 	addObject(tri);
 
 	GameObject cam;
+	cam.transform.pos = vec3(0, 0, -2);
 	Camera* camera = new Camera();
 	FlyMove* flymove = new FlyMove();
 	cam.addComponent(camera);
 	cam.addComponent(flymove);
+	addObject(cam);
 
 	Camera::setMain(camera);
 

@@ -133,6 +133,7 @@
     <ClCompile Include="src\flymove.cpp" />
     <ClCompile Include="src\gamec.cpp" />
     <ClCompile Include="src\gameobject.cpp" />
+    <ClCompile Include="src\gametime.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mesh.cpp" />
