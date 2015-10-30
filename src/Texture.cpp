@@ -8,11 +8,6 @@ Texture::Texture(string image)
 	loadImage(image);
 }
 
-Texture::Texture(Color color)
-{
-	genImage(color);
-}
-
 GLuint Texture::getId() { return id; }
 
 void Texture::loadImage(string image)
@@ -30,9 +25,4 @@ void Texture::loadImage(string image)
 	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-}
-
-void Texture::genImage(Color color)
-{
-
 }

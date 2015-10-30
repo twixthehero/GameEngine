@@ -18,6 +18,7 @@
     <ClCompile Include="src\flymove.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\gametime.cpp" />
+    <ClCompile Include="src\material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\color.h" />
@@ -39,6 +40,8 @@
     <ClInclude Include="inc\camera.h" />
     <ClInclude Include="inc\FlyMove.h" />
     <ClInclude Include="inc\input.h" />
+    <ClInclude Include="inc\material.h" />
+    <ClInclude Include="inc\mattype.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\default.fs" />

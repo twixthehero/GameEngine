@@ -10,7 +10,6 @@ using namespace std;
 
 GLFWwindow* window;
 Input input;
-ShaderManager shaderManager;
 GLuint defShader;
 GLuint uniWorld;
 World world;
@@ -21,10 +20,10 @@ void init()
 
 	GameTime::init();
 	input.setWindow(window);
-	shaderManager.init();
+	ShaderManager::init();
 	world.init();
 
-	defShader = shaderManager.getDefaultShader();
+	defShader = ShaderManager::getDefaultShader();
 	uniWorld = glGetUniformLocation(defShader, "worldMatrix");
 }
 
@@ -37,8 +36,6 @@ void update()
 void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glUseProgram(defShader);
 
 	glProgramUniformMatrix4fv(defShader, uniWorld, 1, GL_FALSE,
 		&(Camera::getMain()->getWorldMatrix())[0][0]);

@@ -12,7 +12,7 @@ Model::Model(string modelName)
 
 Model::~Model() {}
 
-Mesh Model::getMesh()
+Mesh* Model::getMesh()
 {
 	return mesh;
 }
@@ -131,8 +131,12 @@ void Model::genMeshData(vector<string> lines)
 		}
 	}
 
-	mesh.indices = index;
-	mesh.data = toVectorFloat(nodup);
-	mesh.hasUVs = hasUVs;
-	mesh.hasNormals = hasNormals;
+	if (mesh != NULL)
+		delete mesh;
+
+	mesh = new Mesh();
+	mesh->indices = index;
+	mesh->data = toVectorFloat(nodup);
+	mesh->hasUVs = hasUVs;
+	mesh->hasNormals = hasNormals;
 }

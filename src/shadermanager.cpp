@@ -1,34 +1,28 @@
 #include <GL\glew.h>
 #include <iostream>
-
 #include "shader.h"
 #include "shadermanager.h"
-
 using namespace std;
 
-ShaderManager::ShaderManager()
-{
-	
-}
+ShaderManager* ShaderManager::instance = new ShaderManager();
 
-ShaderManager::~ShaderManager()
-{
-
-}
+ShaderManager::ShaderManager() {}
+ShaderManager::~ShaderManager() {}
 
 void ShaderManager::init()
 {
 	load("default");
+	load("color");
 }
 
-GLuint ShaderManager::getDefaultShader() { return loadedShaders["default"]; }
+GLuint ShaderManager::getDefaultShader() { return instance->loadedShaders["default"]; }
 
 GLuint ShaderManager::getShader(string name)
 {
-	if (loadedShaders[name] == NULL)
+	if (instance->loadedShaders[name] == NULL)
 		load(name);
 
-	return loadedShaders[name];
+	return instance->loadedShaders[name];
 }
 
 void ShaderManager::load(string name)
@@ -69,15 +63,15 @@ void ShaderManager::load(string name)
 	}
 
 	cout << "Reserving pointer for shader" << endl;
-	loadedShaders[name] = 0;
+	instance->loadedShaders[name] = 0;
 
 	cout << "Linking vertex and fragment" << endl;
-	loadedShaders[name] = glCreateProgram();
-	glAttachShader(loadedShaders[name], vs);
-	glAttachShader(loadedShaders[name], fs);
-	glLinkProgram(loadedShaders[name]);
+	instance->loadedShaders[name] = glCreateProgram();
+	glAttachShader(instance->loadedShaders[name], vs);
+	glAttachShader(instance->loadedShaders[name], fs);
+	glLinkProgram(instance->loadedShaders[name]);
 
-	glGetShaderiv(loadedShaders[name], GL_LINK_STATUS, &success);
+	glGetShaderiv(instance->loadedShaders[name], GL_LINK_STATUS, &success);
 	if (GL_TRUE != success)
 	{
 		cout << "ERROR: shader '" << name << "' did not link properly" << endl;

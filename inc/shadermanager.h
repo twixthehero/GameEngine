@@ -7,14 +7,15 @@ using namespace std;
 class ShaderManager
 {
 public:
+	static void init();
+	static GLuint getDefaultShader();
+	static GLuint getShader(string);
+	static void load(string);
+
+	static ShaderManager* instance;
+private:
 	ShaderManager();
 	~ShaderManager();
-
-	void init();
-	GLuint getDefaultShader();
-	GLuint getShader(string);
-private:
-	void load(string);
 
 	unordered_map<string, GLuint> loadedShaders;
 };

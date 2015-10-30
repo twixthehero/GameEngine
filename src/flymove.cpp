@@ -34,11 +34,11 @@ void FlyMove::update()
 	{
 		trans->pos.x -= moveSpeed * GameTime::dt;
 	}
-	if (Input::getKey(GLFW_KEY_E))
+	if (Input::getKey(GLFW_KEY_SPACE))
 	{
 		trans->pos.y += moveSpeed * GameTime::dt;
 	}
-	if (Input::getKey(GLFW_KEY_Q))
+	if (Input::getKey(GLFW_KEY_LEFT_SHIFT))
 	{
 		trans->pos.y -= moveSpeed * GameTime::dt;
 	}

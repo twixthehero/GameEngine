@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\material.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\color.cpp" />
     <ClCompile Include="src\flymove.cpp" />
@@ -156,6 +157,8 @@
     <ClInclude Include="inc\gametime.h" />
     <ClInclude Include="inc\igamec.h" />
     <ClInclude Include="inc\input.h" />
+    <ClInclude Include="inc\material.h" />
+    <ClInclude Include="inc\mattype.h" />
     <ClInclude Include="inc\mesh.h" />
     <ClInclude Include="inc\meshrenderer.h" />
     <ClInclude Include="inc\model.h" />

@@ -10,7 +10,7 @@ public:
 	Model(string);
 	~Model();
 
-	Mesh getMesh();
+	Mesh* getMesh();
 private:
 	void load();
 	void readModelData();
@@ -18,5 +18,5 @@ private:
 
 	const string MODEL_DIR = "models\\";
 	string name;
-	Mesh mesh;
+	Mesh* mesh;
 };
