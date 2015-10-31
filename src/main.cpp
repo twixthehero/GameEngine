@@ -1,5 +1,7 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 #include <iostream>
 #include "camera.h"
 #include "gametime.h"
@@ -10,6 +12,7 @@ using namespace std;
 
 GLFWwindow* window;
 Input input;
+FT_Library ft;
 GLuint defShader;
 GLuint uniWorld;
 World world;
@@ -18,8 +21,13 @@ void init()
 {
 	glClearColor(101 / 255.0f, 156 / 255.0f, 239 / 255.0f, 1.0f);
 
-	GameTime::init();
 	input.setWindow(window);
+	if (FT_Init_FreeType(&ft))
+	{
+		cout << "Unable to initialize freetype library." << endl;
+		exit(1);
+	}
+	GameTime::init();
 	ShaderManager::init();
 	world.init();
 

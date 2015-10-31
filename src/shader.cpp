@@ -1,34 +1,53 @@
-#include <iostream>
-#include <fstream>
 #include <string>
 #include "shader.h"
-
 using namespace std;
 
-Shader::Shader(string file)
+Shader::Shader(GLuint loc)
 {
-	load(file);
+	shader = loc;
 }
 
-string Shader::getText()
+GLuint Shader::getProgram()
 {
-	return text;
+	return shader;
 }
 
-void Shader::load(string filename)
+void Shader::addUniform(string name)
 {
-	ifstream file("shaders\\" + filename);
-	string line;
+    uniforms[name] = glGetUniformLocation(shader, name.c_str());
+}
 
-	if (file.is_open())
-	{
-		while (getline(file, line))
-		{
-			text += line + "\n";
-		}
+GLuint Shader::getUniformLocation(string name)
+{
+	return uniforms[name];
+}
 
-		file.close();
-	}
+void Shader::setUniformi(string name, int value)
+{
+	glProgramUniform1i(shader, getUniformLocation(name), value);
+}
 
-	cout << "Loaded shader: " << filename << endl;
+void Shader::setUniformf(string name, float value)
+{
+	glProgramUniform1f(shader, getUniformLocation(name), value);
+}
+
+void Shader::setUniformd(string name, double value)
+{
+	glProgramUniform1d(shader, getUniformLocation(name), value);
+}
+
+void Shader::setUniform2f(string name, const vec2& value)
+{
+	glProgramUniform2f(shader, getUniformLocation(name), value.x, value.y);
+}
+
+void Shader::setUniform3f(string name, const vec3& value)
+{
+	glProgramUniform3f(shader, getUniformLocation(name), value.x, value.y, value.z);
+}
+
+void Shader::setUniform4f(string name, const vec4& value)
+{
+    glProgramUniform4f(shader, getUniformLocation(name), value.x, value.y, value.z, value.w);
 }

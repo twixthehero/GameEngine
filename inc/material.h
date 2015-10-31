@@ -13,6 +13,7 @@ public:
 
 	GLuint getShader();
 	EMaterialType getType();
+	int getDataSize();
 private:
 	GLuint shader;
 	EMaterialType type;

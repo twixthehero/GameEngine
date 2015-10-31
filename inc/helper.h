@@ -16,7 +16,7 @@ vector<string> split(string s, char delim)
 	return elems;
 }
 
-vector<float> toVectorFloat(vector<Vertex> verts)
+vector<float> toVectorFloat(vector<Vertex> verts, bool hasUV, bool hasNormal)
 {
 	vector<float> data;
 
@@ -25,11 +25,19 @@ vector<float> toVectorFloat(vector<Vertex> verts)
 		data.push_back(verts[i].pos.x);
 		data.push_back(verts[i].pos.y);
 		data.push_back(verts[i].pos.z);
-		data.push_back(verts[i].uv.x);
-		data.push_back(verts[i].uv.y);
-		data.push_back(verts[i].norm.x);
-		data.push_back(verts[i].norm.y);
-		data.push_back(verts[i].norm.z);
+
+		if (hasUV)
+		{
+			data.push_back(verts[i].uv.x);
+			data.push_back(verts[i].uv.y);
+		}
+
+		if (hasNormal)
+		{
+			data.push_back(verts[i].norm.x);
+			data.push_back(verts[i].norm.y);
+			data.push_back(verts[i].norm.z);
+		}
 	}
 
 	return data;

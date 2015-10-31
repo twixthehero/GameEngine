@@ -19,8 +19,9 @@ void World::init()
 {
 	GameObject* tri = new GameObject();
 	tri->transform->pos.z = 5;
-	Model* triModel = new Model("triangle");
-	Material* mat = new Material(EMaterialType::COLOR, ShaderManager::getDefaultShader());
+	Model* triModel = new Model("untitled"); Material* mat = new Material(EMaterialType::DEFAULT, ShaderManager::getDefaultShader());
+	//Model* triModel = new Model("triangle"); Material* mat = new Material(EMaterialType::DEFAULT, ShaderManager::getDefaultShader());
+	//Model* triModel = new Model("triangleColor"); Material* mat = new Material(EMaterialType::COLOR, ShaderManager::getShader("color"));
 	MeshRenderer* triRenderer = new MeshRenderer(triModel, mat);
 	tri->addComponent(triRenderer);
 	addObject(tri);

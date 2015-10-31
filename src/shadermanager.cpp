@@ -1,5 +1,6 @@
 #include <GL\glew.h>
 #include <iostream>
+#include <fstream>
 #include "shader.h"
 #include "shadermanager.h"
 using namespace std;
@@ -15,24 +16,43 @@ void ShaderManager::init()
 	load("color");
 }
 
-GLuint ShaderManager::getDefaultShader() { return instance->loadedShaders["default"]; }
+GLuint ShaderManager::getDefaultShader() { return instance->loadedShaders["default"]->getProgram(); }
 
 GLuint ShaderManager::getShader(string name)
 {
 	if (instance->loadedShaders[name] == NULL)
 		load(name);
 
-	return instance->loadedShaders[name];
+	return instance->loadedShaders[name]->getProgram();
+}
+
+string ShaderManager::readText(string filename)
+{
+	cout << "Reading contents" << endl;
+	ifstream file("shaders\\" + filename);
+	string line;
+	string text;
+
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			text += line + "\n";
+		}
+
+		file.close();
+	}
+
+	cout << "Finished read" << endl;
+	return text;
 }
 
 void ShaderManager::load(string name)
 {
 	cout << "Loading shader: " << name << endl;
-	Shader dv(name + ".vs");
-	Shader df(name + ".fs");
 
-	string v = dv.getText();
-	string f = df.getText();
+	string v = readText(name + ".vs");
+	string f = readText(name + ".fs");
 	const char* vert = v.c_str();
 	const char* frag = f.c_str();
 
@@ -63,15 +83,21 @@ void ShaderManager::load(string name)
 	}
 
 	cout << "Reserving pointer for shader" << endl;
-	instance->loadedShaders[name] = 0;
+	Shader* shader = new Shader(glCreateProgram());
+	instance->loadedShaders[name] = shader;
+
+	if (shader->getProgram() == 0)
+	{
+		cout << "ERROR: Unable to create program space for shader" << endl;
+		exit(-1);
+	}
 
 	cout << "Linking vertex and fragment" << endl;
-	instance->loadedShaders[name] = glCreateProgram();
-	glAttachShader(instance->loadedShaders[name], vs);
-	glAttachShader(instance->loadedShaders[name], fs);
-	glLinkProgram(instance->loadedShaders[name]);
+	glAttachShader(shader->getProgram(), vs);
+	glAttachShader(shader->getProgram(), fs);
+	glLinkProgram(shader->getProgram());
 
-	glGetShaderiv(instance->loadedShaders[name], GL_LINK_STATUS, &success);
+	glGetShaderiv(shader->getProgram(), GL_LINK_STATUS, &success);
 	if (GL_TRUE != success)
 	{
 		cout << "ERROR: shader '" << name << "' did not link properly" << endl;

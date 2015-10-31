@@ -22,3 +22,16 @@ EMaterialType Material::getType()
 {
 	return type;
 }
+
+int Material::getDataSize()
+{
+	switch (type)
+	{
+	case EMaterialType::DEFAULT:
+		return 32;
+	case EMaterialType::COLOR:
+		return 28;
+	default:
+		return 0;
+	}
+}

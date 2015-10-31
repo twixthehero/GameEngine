@@ -59,11 +59,13 @@ void Model::genMeshData(vector<string> lines)
 	{
 		if (lines[i].find("vt") == 0)
 		{
+			hasUVs = true;
 			vector<string> tokens = split(lines[i].substr(3, lines[i].length() - 3), ' ');
 			uvs.push_back(vec2(stof(tokens[0]), stof(tokens[1])));
 		}
 		else if (lines[i].find("vn") == 0)
 		{
+			hasNormals = true;
 			vector<string> tokens = split(lines[i].substr(3, lines[i].length() - 3), ' ');
 			norms.push_back(vec3(stof(tokens[0]), stof(tokens[1]), stof(tokens[2])));
 		}
@@ -81,9 +83,7 @@ void Model::genMeshData(vector<string> lines)
 		}
 	}
 
-	vector<string> indices = split(f[0], '/');
-	if (indices[1].size() > 0) hasUVs = true;
-	if (indices[2].size() > 0) hasNormals = true;
+	vector<string> indices;
 
 	//create verts for all the data
 	vector<Vertex> verts;
@@ -136,7 +136,7 @@ void Model::genMeshData(vector<string> lines)
 
 	mesh = new Mesh();
 	mesh->indices = index;
-	mesh->data = toVectorFloat(nodup);
+	mesh->data = toVectorFloat(nodup, hasUVs, hasNormals);
 	mesh->hasUVs = hasUVs;
 	mesh->hasNormals = hasNormals;
 }
