@@ -10,11 +10,15 @@
 #include "world.h"
 using namespace std;
 
+#include <glm\gtx\transform.hpp>
+using namespace glm;
+
 GLFWwindow* window;
 Input input;
 GLuint defShader;
 GLuint uniWorld;
 World world;
+Font* font;
 
 void init()
 {
@@ -31,6 +35,8 @@ void init()
 	GameTime::init();
 	ShaderManager::init();
 	world.init();
+
+    font = FontManager::getDefaultFont();
 
 	defShader = ShaderManager::getDefaultShader()->getProgram();
 	uniWorld = glGetUniformLocation(defShader, "worldMatrix");
@@ -50,6 +56,10 @@ void render()
 		&(Camera::getMain()->getWorldMatrix())[0][0]);
 
 	world.render();
+
+    Shader* s = ShaderManager::getShader("font");
+    font->setSize(24);
+    font->renderText("Test string", -1 + 8 * Font::SX, 1 - 50 * Font::SY, Color(0.0f, 1.0f, 0.0f));
 
 	glFlush();
 }

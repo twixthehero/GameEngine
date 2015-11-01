@@ -16,10 +16,11 @@ FontManager::~FontManager() {}
 
 void FontManager::init()
 {
+    load("freesans");
     load("techniclite");
 }
 
-Font* FontManager::getDefaultFont() { return instance->loadedFonts["techniclite"]; }
+Font* FontManager::getDefaultFont() { return instance->loadedFonts["freesans"]; }//return instance->loadedFonts["techniclite"]; }
 
 Font* FontManager::getFont(string name)
 {
