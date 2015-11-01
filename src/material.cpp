@@ -7,13 +7,13 @@ Material::Material(EMaterialType tp, string name)
 	shader = ShaderManager::getShader(name);
 }
 
-Material::Material(EMaterialType tp, GLuint shade)
+Material::Material(EMaterialType tp, Shader* shade)
 {
 	type = tp;
 	shader = shade;
 }
 
-GLuint Material::getShader()
+Shader* Material::getShader()
 {
 	return shader;
 }

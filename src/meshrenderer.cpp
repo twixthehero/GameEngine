@@ -45,7 +45,7 @@ void MeshRenderer::init()
 
 void MeshRenderer::render()
 {
-	glUseProgram(material->getShader());
+	glUseProgram(material->getShader()->getProgram());
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, mesh->getNumIndices(), GL_UNSIGNED_INT, NULL);
 }

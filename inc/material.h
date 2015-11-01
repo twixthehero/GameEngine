@@ -9,12 +9,12 @@ class Material
 {
 public:
 	Material(EMaterialType, string);
-	Material(EMaterialType, GLuint);
+	Material(EMaterialType, Shader*);
 
-	GLuint getShader();
+	Shader* getShader();
 	EMaterialType getType();
 	int getDataSize();
 private:
-	GLuint shader;
+	Shader* shader;
 	EMaterialType type;
 };

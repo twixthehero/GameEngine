@@ -1,18 +1,17 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
-#include <ft2build.h>
-#include FT_FREETYPE_H
 #include <iostream>
 #include "camera.h"
 #include "gametime.h"
 #include "input.h"
+#include "font.h"
+#include "fontmanager.h"
 #include "shadermanager.h"
 #include "world.h"
 using namespace std;
 
 GLFWwindow* window;
 Input input;
-FT_Library ft;
 GLuint defShader;
 GLuint uniWorld;
 World world;
@@ -21,17 +20,19 @@ void init()
 {
 	glClearColor(101 / 255.0f, 156 / 255.0f, 239 / 255.0f, 1.0f);
 
+    int* w = new int;
+    int* h = new int;
+    glfwGetWindowSize(window, w, h);
+    Font::SX = 2.0 / *w;
+    Font::SY = 2.0 / *h;
+
 	input.setWindow(window);
-	if (FT_Init_FreeType(&ft))
-	{
-		cout << "Unable to initialize freetype library." << endl;
-		exit(1);
-	}
+    FontManager::init();
 	GameTime::init();
 	ShaderManager::init();
 	world.init();
 
-	defShader = ShaderManager::getDefaultShader();
+	defShader = ShaderManager::getDefaultShader()->getProgram();
 	uniWorld = glGetUniformLocation(defShader, "worldMatrix");
 }
 

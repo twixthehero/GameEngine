@@ -9,13 +9,14 @@ class ShaderManager
 {
 public:
 	static void init();
-	static GLuint getDefaultShader();
-	static GLuint getShader(string);
-	static string readText(string);
-	static void load(string);
+	static Shader* getDefaultShader();
+	static Shader* getShader(string);
 
 	static ShaderManager* instance;
 private:
+    static string readText(string);
+    static void load(string);
+
 	ShaderManager();
 	~ShaderManager();
 

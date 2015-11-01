@@ -1,0 +1,68 @@
+#include <GL\glew.h>
+#include "font.h"
+#include "shadermanager.h"
+
+float Font::SX = 0;
+float Font::SY = 0;
+
+Font::Font(FT_Face _face)
+{
+    face = _face;
+    g = face->glyph;
+
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 16, (void*)0);
+}
+
+Font::~Font() {}
+
+float Font::getSize() { return size; }
+
+void Font::setSize(float _size)
+{
+    size = _size;
+    FT_Set_Pixel_Sizes(face, 0, size);
+}
+
+void Font::renderText(string text, float x, float y, Color c)
+{
+    Shader* shader = ShaderManager::getShader("font");
+    GLuint uniLoc = shader->getUniformLocation("color");
+
+    for (int i = 0; i < text.length(); i++)
+    {
+        if (FT_Load_Char(face, text[i], FT_LOAD_RENDER))
+            continue;
+
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, g->bitmap.width, g->bitmap.rows,
+            0, GL_RED, GL_UNSIGNED_BYTE, g->bitmap.buffer);
+
+        float x2 = x + g->bitmap_left * SX;
+        float y2 = -y - g->bitmap_top * SY;
+        float w = g->bitmap.width * SX;
+        float h = g->bitmap.rows * SY;
+
+        GLfloat box[4][4] = 
+        {
+            {x2    , -y2    , 0, 0},
+            {x2 + w, -y2    , 1, 0},
+            {x2    , -y2 - h, 0, 1},
+            {x2 + w, -y2 - h, 1, 1}
+        };
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(box), box, GL_DYNAMIC_DRAW);
+
+        GLfloat color[4] = { c.r, c.g, c.b, c.a };
+        glUniform4fv(uniLoc, 1, color);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+        x += (g->advance.x >> 6) * SX;
+        y += (g->advance.y >> 6) * SY;
+    }
+}

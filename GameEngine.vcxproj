@@ -128,6 +128,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\font.cpp" />
+    <ClCompile Include="src\fontmanager.cpp" />
     <ClCompile Include="src\material.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\color.cpp" />
@@ -151,6 +153,8 @@
     <ClInclude Include="inc\camera.h" />
     <ClInclude Include="inc\color.h" />
     <ClInclude Include="inc\flymove.h" />
+    <ClInclude Include="inc\font.h" />
+    <ClInclude Include="inc\fontmanager.h" />
     <ClInclude Include="inc\gamec.h" />
     <ClInclude Include="inc\gamectype.h" />
     <ClInclude Include="inc\gameobject.h" />

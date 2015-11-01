@@ -14,16 +14,17 @@ void ShaderManager::init()
 {
 	load("default");
 	load("color");
+    load("font");
 }
 
-GLuint ShaderManager::getDefaultShader() { return instance->loadedShaders["default"]->getProgram(); }
+Shader* ShaderManager::getDefaultShader() { return instance->loadedShaders["default"]; }
 
-GLuint ShaderManager::getShader(string name)
+Shader* ShaderManager::getShader(string name)
 {
 	if (instance->loadedShaders[name] == NULL)
 		load(name);
 
-	return instance->loadedShaders[name]->getProgram();
+	return instance->loadedShaders[name];
 }
 
 string ShaderManager::readText(string filename)
