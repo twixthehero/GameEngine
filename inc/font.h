@@ -21,6 +21,7 @@ public:
 private:
     FT_Face face;
     FT_GlyphSlot g; //pointer to face->glyph
+    GLuint tex;
     GLuint vao;
     GLuint vbo;
     float size;
