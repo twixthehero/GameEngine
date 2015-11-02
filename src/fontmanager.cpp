@@ -16,11 +16,12 @@ FontManager::~FontManager() {}
 
 void FontManager::init()
 {
+    load("anonymouspro-regular");
     load("freesans");
     load("techniclite");
 }
 
-Font* FontManager::getDefaultFont() { return instance->loadedFonts["freesans"]; }//return instance->loadedFonts["techniclite"]; }
+Font* FontManager::getDefaultFont() { return instance->loadedFonts["anonymouspro-regular"]; }
 
 Font* FontManager::getFont(string name)
 {

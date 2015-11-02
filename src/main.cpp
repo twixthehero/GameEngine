@@ -1,6 +1,7 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <iostream>
+#include <sstream>
 #include "camera.h"
 #include "gametime.h"
 #include "input.h"
@@ -13,12 +14,21 @@ using namespace std;
 #include <glm\gtx\transform.hpp>
 using namespace glm;
 
+//Engine vars
 GLFWwindow* window;
-Input input;
 GLuint defShader;
 GLuint uniWorld;
 World world;
 Font* font;
+
+//option vars
+bool debug = false;
+
+//info vars
+double lastFrames = 0;
+double lastTime;
+int numFrames = 0;
+double frameTime;
 
 void init()
 {
@@ -30,7 +40,7 @@ void init()
     Font::SX = 2.0 / *w;
     Font::SY = 2.0 / *h;
 
-	input.setWindow(window);
+	Input::init(window);
     FontManager::init();
 	GameTime::init();
 	ShaderManager::init();
@@ -45,6 +55,7 @@ void init()
 void update()
 {
 	GameTime::update();
+    Input::update();
 	world.update();
 }
 
@@ -58,8 +69,14 @@ void render()
 	world.render();
 
     Shader* s = ShaderManager::getShader("font");
-    font->setSize(24);
-    font->renderText("Test string", -1 + 8 * Font::SX, 1 - 50 * Font::SY, Color(0.0f, 1.0f, 0.0f));
+    font->setSize(18);
+
+    ostringstream stream;
+    stream << lastFrames;
+    font->renderText("FPS: " + stream.str(), -1 + 4 * Font::SX, 1 - 18 * Font::SY, Color(0.0f, 1.0f, 0.0f));
+    stream.str(""); stream.clear();
+    stream << frameTime;
+    font->renderText("Frame Time: " + stream.str(), -1 + 4 * Font::SX, 1 - 36 * Font::SY, Color(0.0f, 1.0f, 0.0f));
 
 	glFlush();
 }
@@ -101,11 +118,21 @@ int main()
 	init();
 	while (!glfwWindowShouldClose(window))
 	{
+        if (glfwGetTime() - lastTime >= 1.0)
+        {
+            frameTime = 1000.0 / numFrames;
+            lastFrames = numFrames;
+            numFrames = 0;
+            lastTime += 1.0;
+        }
+
 		update();
 		render();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
+        numFrames++;
 	}
 
 	glfwTerminate();

@@ -14,7 +14,11 @@ GLuint Shader::getProgram()
 
 void Shader::addUniform(string name)
 {
-    uniforms[name] = glGetUniformLocation(shader, name.c_str());
+    unordered_map<string, GLuint>::const_iterator i = uniforms.find(name);
+
+    //if the key doesn't already exist, add it
+    if (i == uniforms.end())
+        uniforms[name] = glGetUniformLocation(shader, name.c_str());
 }
 
 GLuint Shader::getUniformLocation(string name)
