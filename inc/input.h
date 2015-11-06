@@ -12,6 +12,7 @@ public:
 	static bool getKey(int);
     static bool getKeyUp(int);
     static bool getKeyDown(int);
+	static char getKeyChar(int);
 private:
 	static GLFWwindow* window;
     static unordered_map<int, bool> cur;
