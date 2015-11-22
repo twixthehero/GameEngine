@@ -19,6 +19,8 @@
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\gametime.cpp" />
     <ClCompile Include="src\material.cpp" />
+    <ClCompile Include="src\font.cpp" />
+    <ClCompile Include="src\fontmanager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\color.h" />
@@ -42,6 +44,8 @@
     <ClInclude Include="inc\input.h" />
     <ClInclude Include="inc\material.h" />
     <ClInclude Include="inc\mattype.h" />
+    <ClInclude Include="inc\fontmanager.h" />
+    <ClInclude Include="inc\font.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\default.fs" />

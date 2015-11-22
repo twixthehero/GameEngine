@@ -22,6 +22,7 @@ World world;
 Font* font;
 
 //option vars
+bool showGui = true;
 bool debug = false;
 
 //info vars
@@ -56,6 +57,12 @@ void update()
 {
 	GameTime::update();
     Input::update();
+
+    if (Input::getKeyUp(GLFW_KEY_F3))
+    {
+        debug = !debug;
+    }
+
 	world.update();
 }
 
@@ -67,18 +74,28 @@ void render()
 		&(Camera::getMain()->getWorldMatrix())[0][0]);
 
 	world.render();
+}
 
-    Shader* s = ShaderManager::getShader("font");
-    font->setSize(18);
+void renderGui()
+{
+    if (debug)
+    {
+        int y = 0;
 
-    ostringstream stream;
-    stream << lastFrames;
-    font->renderText("FPS: " + stream.str(), -1 + 4 * Font::SX, 1 - 18 * Font::SY, Color(0.0f, 1.0f, 0.0f));
-    stream.str(""); stream.clear();
-    stream << frameTime;
-    font->renderText("Frame Time: " + stream.str(), -1 + 4 * Font::SX, 1 - 36 * Font::SY, Color(0.0f, 1.0f, 0.0f));
+        font->setSize(18);
+        ostringstream stream;
+        stream << lastFrames;
+        font->renderText("FPS: " + stream.str(), -1 + 4 * Font::SX, 1 - (y += 18) * Font::SY, Color(0.0f, 1.0f, 0.0f));
+        stream.str(""); stream.clear();
+        stream << frameTime;
+        font->renderText("Frame Time: " + stream.str(), -1 + 4 * Font::SX, 1 - (y += 18) * Font::SY, Color(0.0f, 1.0f, 0.0f));
 
-	glFlush();
+        //main cam debug
+        vec3 pos = Camera::getMain()->gameObject->transform->pos;
+        stream.str(""); stream.clear();
+        stream << "(" << pos.x << ", " << pos.y << ", " << pos.z << ")";
+        font->renderText("Camera Pos: " + stream.str(), -1 + 4 * Font::SX, 1 - (y += 18) * Font::SY, Color(0.0f, 1.0f, 0.0f));
+    }
 }
 
 int main()
@@ -128,6 +145,9 @@ int main()
 
 		update();
 		render();
+        if (showGui) renderGui();
+
+        glFlush();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

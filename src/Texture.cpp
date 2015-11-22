@@ -12,8 +12,9 @@ GLuint Texture::getId() { return id; }
 
 void Texture::loadImage(string image)
 {
-	const char* imageName = (TEX_DIR + image).c_str();
-	id = SOIL_load_OGL_texture(imageName, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+    string path = TEX_DIR + image;
+	const char* imageName = path.c_str();
+    id = SOIL_load_OGL_texture(imageName, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
 
 	if (id == 0)
 	{

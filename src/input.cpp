@@ -1,4 +1,5 @@
 #include "input.h"
+#include <iostream>
 
 GLFWwindow* Input::window = NULL;
 unordered_map<int, bool> Input::cur;
@@ -114,6 +115,7 @@ void Input::update()
 {
     pressed.clear();
     released.clear();
+    cur.clear();
 
     //store all current keys
     for (int i = 0; i < NUM_KEYS; i++)
@@ -132,6 +134,11 @@ void Input::update()
             prev[VALID_KEYS[i]] == GLFW_PRESS)
             released[VALID_KEYS[i]] = true;
     }
+
+    //store cur into prev
+    prev.clear();
+    for (int i = 0; i < NUM_KEYS; i++)
+        prev[VALID_KEYS[i]] = cur[VALID_KEYS[i]];
 }
 
 bool Input::getKey(int keycode)

@@ -13,6 +13,13 @@ Material::Material(EMaterialType tp, Shader* shade)
 	shader = shade;
 }
 
+Material::Material(EMaterialType tp, Shader* shade, Texture* tex)
+{
+    type = tp;
+    shader = shade;
+    texture = tex;
+}
+
 Shader* Material::getShader()
 {
 	return shader;
@@ -34,4 +41,10 @@ int Material::getDataSize()
 	default:
 		return 0;
 	}
+}
+
+void Material::readyGL()
+{
+    glUseProgram(getShader()->getProgram());
+    glBindTexture(GL_TEXTURE_2D, texture->getId());
 }

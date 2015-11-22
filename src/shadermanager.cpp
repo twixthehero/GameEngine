@@ -15,6 +15,8 @@ void ShaderManager::init()
 	load("default");
 	load("color");
     load("font");
+
+    //instance->loadedShaders["default"]->addUniform("tex");
 }
 
 Shader* ShaderManager::getDefaultShader() { return instance->loadedShaders["default"]; }
