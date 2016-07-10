@@ -142,6 +142,7 @@
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\meshrenderer.cpp" />
     <ClCompile Include="src\model.cpp" />
+    <ClCompile Include="src\quaternion.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\shadermanager.cpp" />
     <ClCompile Include="src\texture.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="inc\mesh.h" />
     <ClInclude Include="inc\meshrenderer.h" />
     <ClInclude Include="inc\model.h" />
+    <ClInclude Include="inc\quaternion.h" />
     <ClInclude Include="inc\shader.h" />
     <ClInclude Include="inc\shadermanager.h" />
     <ClInclude Include="inc\helper.h" />
